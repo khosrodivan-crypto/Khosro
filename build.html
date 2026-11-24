@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>اسمبل هوشمند سیستم | ولتا</title>
+<meta name="description" content="با اسمبل هوشمند ولتا سیستم کامپیوتری خود را مرحله‌به‌مرحله ببندید؛ بررسی خودکار سازگاری سوکت، نوع رم، ابعاد کیس و توان پاور همراه با محاسبه قیمت نهایی و توان مصرفی.">
+<meta name="theme-color" content="#070a12">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="siteHeader"></div>
+
+<main class="container">
+  <div class="crumbs">
+    <a href="index.html">خانه</a>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+    <span>اسمبل هوشمند</span>
+  </div>
+
+  <div class="section-head" style="margin-bottom:12px">
+    <div>
+      <h1 class="page-title">اسمبل هوشمند سیستم</h1>
+      <p class="page-sub">قطعات سازگار به‌صورت خودکار پیشنهاد می‌شوند؛ قیمت نهایی، توان مصرفی و هشدارهای سازگاری را همان لحظه ببینید.</p>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap" id="presetWrap">
+      <button class="btn btn-sm btn-ghost" data-preset="eco">سیستم اقتصادی</button>
+      <button class="btn btn-sm btn-ghost" data-preset="game">سیستم گیمینگ</button>
+      <button class="btn btn-sm btn-ghost" data-preset="pro">سیستم حرفه‌ای</button>
+    </div>
+  </div>
+
+  <div class="builder-layout">
+    <div>
+      <div class="build-progress" id="buildProgress"></div>
+      <div class="build-panel" id="buildPanel"></div>
+      <div id="buildAll" style="margin-top:14px"></div>
+    </div>
+    <aside>
+      <div class="build-summary" id="buildSummary"></div>
+    </aside>
+  </div>
+
+  <section class="section">
+    <div class="section-head"><h2 class="section-title"><span class="st-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span>چرا اسمبل هوشمند؟</h2></div>
+    <div class="prod-grid g3" id="whyBuild" style="gap:12px"></div>
+  </section>
+</main>
+
+<div id="siteFooter"></div>
+<script src="js/seed.js"></script>
+<script src="iran-cities.js"></script>
+<script src="js/core.js"></script>
+<script src="js/build.js"></script>
+</body>
+</html>

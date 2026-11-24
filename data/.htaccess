@@ -1,0 +1,7 @@
+Order deny,allow
+Deny from all
+<IfModule mod_authz_core.c>
+Require all denied
+</IfModule>
+Options -Indexes
+php_flag engine off

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /data/
+Disallow: /uploads/
+Disallow: /track.html
+
+Sitemap: https://volta-pc.ir/sitemap.xml

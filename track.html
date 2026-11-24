@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>پیگیری سفارش | ولتا</title>
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#070a12">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="stylesheet" href="css/main.css">
+<style>
+.track-wrap{max-width:520px;margin:34px auto 60px}
+.track-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px}
+.track-result{margin-top:16px}
+.tr-line{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px dashed var(--line-soft);font-size:12.5px}
+.tr-line:last-child{border:0}
+.tr-line span{color:var(--muted)}
+.tr-line b{color:#fff}
+.steps-line{display:flex;align-items:center;gap:6px;margin:16px 0}
+.st{flex:1;text-align:center;font-size:10.5px;color:var(--muted);position:relative;padding-top:22px}
+.st::before{content:"";position:absolute;top:6px;left:50%;translate:-50% 0;width:13px;height:13px;border-radius:50%;background:#243047;border:2px solid #0a0f19}
+.st.done::before{background:linear-gradient(135deg,#00d1ff,#3b82f6);box-shadow:0 0 0 4px rgba(0,209,255,.15)}
+.st.done{color:#7de6ff}
+</style>
+</head>
+<body>
+<div id="siteHeader"></div>
+<main class="container">
+  <div class="crumbs">
+    <a href="index.html">خانه</a>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+    <span>پیگیری سفارش</span>
+  </div>
+  <div class="track-wrap">
+    <h1 class="page-title">پیگیری سفارش</h1>
+    <p class="page-sub">کد پیگیری که پس از ثبت سفارش دریافت کرده‌اید را وارد کنید.</p>
+    <div class="track-card">
+      <form id="trackForm">
+        <div class="field">
+          <label>کد پیگیری سفارش</label>
+          <input class="input num" name="code" placeholder="AHT-12345678" dir="ltr" required>
+        </div>
+        <div class="err" id="trackErr"></div>
+        <button class="btn btn-block" type="submit">جستجوی سفارش</button>
+      </form>
+      <div class="track-result" id="trackResult"></div>
+    </div>
+  </div>
+</main>
+<div id="siteFooter"></div>
+<script src="js/seed.js"></script>
+<script src="iran-cities.js"></script>
+<script src="js/core.js"></script>
+<script>
+(function(){
+  const A = window.AHT;
+  document.addEventListener('DOMContentLoaded', async () => {
+    await A.loadAll(); A.mountChrome();
+    const form = document.getElementById('trackForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const code = form.code.value.trim().toUpperCase();
+      const err = document.getElementById('trackErr'), out = document.getElementById('trackResult');
+      err.textContent = ''; out.innerHTML = '';
+      if (code.length < 5) { err.textContent = 'کد پیگیری معتبر نیست'; return; }
+      try {
+        const r = await A.API.track(code);
+        if (!r || !r.ok) throw new Error((r && r.error) || 'خطا');
+        if (!r.found) { err.textContent = 'سفارشی با این کد پیدا نشد — کد را بررسی کنید یا با پشتیبانی تماس بگیرید'; return; }
+        const stepIdx = r.status === 'approved' ? 2 : r.status === 'canceled' ? -1 : 1;
+        out.innerHTML = '<div class="tr-line"><span>کد سفارش</span><b class="num" dir="ltr">' + A.esc(r.code) + '</b></div>' +
+          '<div class="tr-line"><span>تاریخ ثبت</span><b>' + A.esc(r.date || '—') + '</b></div>' +
+          '<div class="tr-line"><span>تعداد اقلام</span><b>' + A.toFa(r.count || 0) + ' مورد</b></div>' +
+          '<div class="tr-line"><span>مبلغ</span><b>' + A.esc(r.total || '—') + '</b></div>' +
+          '<div class="tr-line"><span>وضعیت</span><b>' + A.esc(r.statusLabel) + '</b></div>' +
+          (stepIdx >= 0 ? '<div class="steps-line"><div class="st done">ثبت شد</div><div class="st ' + (stepIdx >= 1 ? 'done' : '') + '">در حال بررسی</div><div class="st ' + (stepIdx >= 2 ? 'done' : '') + '">تأیید و ارسال</div></div>' : '');
+      } catch (ex) { err.textContent = ex.message; }
+    });
+    const pre = A.params().code;
+    if (pre) { form.code.value = pre; form.dispatchEvent(new Event('submit')); }
+  });
+})();
+</script>
+</body>
+</html>

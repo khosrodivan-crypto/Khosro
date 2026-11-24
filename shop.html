@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>فروشگاه قطعات کامپیوتر | ولتا</title>
+<meta name="description" content="خرید آنلاین پردازنده، مادربرد، رم، کارت گرافیک، حافظه SSD و HDD، خنک‌کننده، کیس و پاور با گارانتی معتبر و قیمت روز. فیلتر بر اساس برند، قیمت و موجودی.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#070a12">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="siteHeader"></div>
+
+<main class="container">
+  <div class="crumbs">
+    <a href="index.html">خانه</a>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+    <span id="crumbCat">فروشگاه</span>
+  </div>
+
+  <div class="shop-layout">
+    <aside class="filters" id="filters">
+      <div class="filter-head">
+        <span>فیلترها</span>
+        <button class="btn btn-sm btn-ghost" id="clearFilters">حذف همه</button>
+      </div>
+      <div class="filter-group">
+        <h5>دسته‌بندی</h5>
+        <div id="fCats"></div>
+      </div>
+      <div class="filter-group">
+        <h5>برند</h5>
+        <div id="fBrands" style="max-height:190px;overflow-y:auto"></div>
+      </div>
+      <div class="filter-group">
+        <h5>محدوده قیمت (تومان)</h5>
+        <div class="price-range">
+          <input class="input num" id="fMin" inputmode="numeric" placeholder="از">
+          <span style="color:var(--muted);font-size:11px">تا</span>
+          <input class="input num" id="fMax" inputmode="numeric" placeholder="تا">
+        </div>
+        <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap" id="quickPrices"></div>
+      </div>
+      <div class="filter-group">
+        <h5>سایر</h5>
+        <label class="f-opt"><input type="checkbox" id="fStock"> فقط کالاهای موجود</label>
+        <label class="f-opt"><input type="checkbox" id="fDeal"> فقط تخفیف‌دار</label>
+      </div>
+    </aside>
+
+    <section>
+      <div class="shop-toolbar">
+        <button class="btn btn-sm btn-ghost" id="openFilters" style="display:none"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg> فیلترها</button>
+        <span class="count" id="resultCount">در حال بارگذاری…</span>
+        <select class="select sort-select" id="sortBy">
+          <option value="pop">پرفروش‌ترین</option>
+          <option value="cheap">ارزان‌ترین</option>
+          <option value="exp">گران‌ترین</option>
+          <option value="off">بیشترین تخفیف</option>
+          <option value="new">جدیدترین</option>
+        </select>
+      </div>
+      <div class="active-filters" id="activeFilters"></div>
+      <div class="prod-grid g3" id="shopGrid"></div>
+      <div class="pagination" id="pagination"></div>
+    </section>
+  </div>
+</main>
+
+<div id="siteFooter"></div>
+<script src="js/seed.js"></script>
+<script src="iran-cities.js"></script>
+<script src="js/core.js"></script>
+<script src="js/shop.js"></script>
+</body>
+</html>
